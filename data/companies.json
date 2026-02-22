@@ -44,19 +44,4 @@
     "asOfDate": "2026-02-21",
     "currency": "USD"
   }
-{
-  "id": "PGY",
-  "name": "Pagaya Technologies Ltd.",
-  "ticker": "PGY",
-  "exchange": "NASDAQ",
-  "sector": "Financial Services",
-  "country": "Israel",
-  "recommendation": "HOLD",
-  "price": 11.89,
-  "baseValue": 13.55,
-  "upsideValue": 19.42,
-  "upsideToBase": 13.9,
-  "asOfDate": "2026-02-21",
-  "currency": "USD"
-}
 ]

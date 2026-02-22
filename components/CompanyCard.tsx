@@ -3,136 +3,150 @@ import Link from "next/link";
 import { CompanyIndex } from "@/types";
 
 function RecBadge({ rec }: { rec: string }) {
-  const map: Record<string, { color: string; bg: string }> = {
-    BUY:   { color: "var(--accent-green)", bg: "rgba(0,255,136,0.08)" },
-    AVOID: { color: "var(--accent-red)",   bg: "rgba(255,69,96,0.08)"  },
-    HOLD:  { color: "var(--accent-amber)", bg: "rgba(255,184,48,0.08)" },
-    SELL:  { color: "var(--accent-red)",   bg: "rgba(255,69,96,0.08)"  },
+  const styles: Record<string, { color: string; bg: string; border: string }> = {
+    BUY:   { color: "#107e3e", bg: "#f0faf5", border: "#a3d9b8" },
+    HOLD:  { color: "#e76500", bg: "#fff8f0", border: "#f9c784" },
+    AVOID: { color: "#bb0000", bg: "#fff5f5", border: "#f5c0c0" },
+    SELL:  { color: "#bb0000", bg: "#fff5f5", border: "#f5c0c0" },
   };
-  const s = map[rec] || map.HOLD;
+  const s = styles[rec] || styles.HOLD;
   return (
     <span style={{
-      fontSize: 9,
-      fontWeight: 700,
-      letterSpacing: "0.18em",
-      color: s.color,
-      background: s.bg,
-      border: `1px solid ${s.color}`,
-      borderRadius: 2,
-      padding: "2px 6px",
-    }}>{rec}</span>
+      fontSize: 10, fontWeight: 700, letterSpacing: "0.08em",
+      color: s.color, background: s.bg,
+      border: `1px solid ${s.border}`,
+      borderRadius: 4, padding: "2px 8px",
+      fontFamily: "'IBM Plex Sans', sans-serif",
+    }}>
+      {rec}
+    </span>
   );
 }
 
-function UpsideBar({ price, base, upside }: { price: number; base: number; upside: number }) {
-  const max = upside * 1.1;
-  const pPct = (price / max) * 100;
-  const bPct = (base / max) * 100;
-  const uPct = (upside / max) * 100;
+function ValuationBar({ price, base, upside }: { price: number; base: number; upside: number }) {
+  const max = upside * 1.12;
+  const pPct = Math.min((price / max) * 100, 100);
+  const bPct = Math.min((base / max) * 100, 100);
+  const uPct = Math.min((upside / max) * 100, 100);
+
+  const isUndervalued = base > price;
+
   return (
-    <div style={{ position: "relative", height: 20, marginTop: 8 }}>
-      <div style={{ position: "absolute", inset: 0, background: "var(--bg-secondary)", borderRadius: 2, overflow: "hidden" }}>
-        <div style={{ width: `${uPct}%`, height: "100%", background: "rgba(167,139,250,0.15)" }} />
+    <div style={{ marginTop: 12 }}>
+      {/* Bar track */}
+      <div style={{ position: "relative", height: 8, background: "#f0f4ff", borderRadius: 6, border: "1px solid #d6e4f7", overflow: "visible" }}>
+        {/* Fill to base (green if under, grey if over) */}
+        <div style={{
+          position: "absolute", top: 0, left: 0, height: "100%",
+          width: `${Math.min(bPct, pPct <= bPct ? bPct : pPct)}%`,
+          background: isUndervalued ? "linear-gradient(90deg, #c8dcf8, #3b8ef3)" : "#e5e7eb",
+          borderRadius: 6,
+        }} />
+        {/* Price marker */}
+        <div style={{
+          position: "absolute", top: -4, bottom: -4,
+          left: `${pPct}%`, width: 2,
+          background: "#e76500", borderRadius: 2,
+          transform: "translateX(-50%)",
+          zIndex: 3,
+        }} />
+        {/* Base IV marker */}
+        <div style={{
+          position: "absolute", top: -4, bottom: -4,
+          left: `${bPct}%`, width: 2,
+          background: "#107e3e", borderRadius: 2,
+          transform: "translateX(-50%)",
+          zIndex: 2,
+        }} />
+        {/* Upside marker */}
+        <div style={{
+          position: "absolute", top: -4, bottom: -4,
+          left: `${uPct}%`, width: 2,
+          background: "#0057d2", borderRadius: 2,
+          transform: "translateX(-50%)",
+          zIndex: 2,
+        }} />
       </div>
-      <div style={{ position: "absolute", inset: 0, background: "transparent", borderRadius: 2, overflow: "hidden" }}>
-        <div style={{ width: `${bPct}%`, height: "100%", background: "rgba(0,255,136,0.12)" }} />
+      {/* Legend */}
+      <div style={{ display: "flex", gap: 14, marginTop: 8, flexWrap: "wrap" }}>
+        {[
+          { label: "Price", value: `$${price.toFixed(2)}`, color: "#e76500" },
+          { label: "Base IV", value: `$${base.toFixed(2)}`, color: "#107e3e" },
+          { label: "Upside IV", value: `$${upside.toFixed(2)}`, color: "#0057d2" },
+        ].map(item => (
+          <div key={item.label} style={{ display: "flex", alignItems: "center", gap: 5 }}>
+            <div style={{ width: 8, height: 8, borderRadius: 2, background: item.color, flexShrink: 0 }} />
+            <span style={{ fontSize: 10, color: "#8696a9", fontFamily: "'IBM Plex Sans', sans-serif" }}>{item.label} </span>
+            <span style={{ fontSize: 10, fontWeight: 700, color: item.color, fontFamily: "'IBM Plex Mono', monospace" }}>{item.value}</span>
+          </div>
+        ))}
       </div>
-      {/* Price marker */}
-      <div style={{ position: "absolute", top: 0, bottom: 0, left: `${pPct}%`, width: 2, background: "var(--accent-amber)", borderRadius: 1 }} />
-      {/* Base marker */}
-      <div style={{ position: "absolute", top: 0, bottom: 0, left: `${bPct}%`, width: 2, background: "var(--accent-green)", borderRadius: 1 }} />
-      {/* Upside marker */}
-      <div style={{ position: "absolute", top: 0, bottom: 0, left: `${uPct}%`, width: 2, background: "var(--accent-purple)", borderRadius: 1 }} />
-      {/* Labels */}
-      <div style={{ position: "absolute", top: 3, left: `${pPct + 1}%`, fontSize: 8, color: "var(--accent-amber)" }}>P</div>
-      <div style={{ position: "absolute", top: 3, left: `${bPct + 1}%`, fontSize: 8, color: "var(--accent-green)" }}>B</div>
-      <div style={{ position: "absolute", top: 3, left: `${Math.max(uPct - 10, 0)}%`, fontSize: 8, color: "var(--accent-purple)" }}>U</div>
     </div>
   );
 }
 
 export default function CompanyCard({ company }: { company: CompanyIndex }) {
-  const upsideColor = company.upsideToBase >= 0 ? "var(--accent-green)" : "var(--accent-red)";
+  const upside = company.upsideToBase;
+  const upsideColor = upside >= 0 ? "#107e3e" : "#bb0000";
 
   return (
     <Link href={`/company/${company.id}`} style={{ textDecoration: "none" }}>
       <div
-        className="panel scan-lines"
-        style={{
-          padding: 0,
-          cursor: "pointer",
-          transition: "border-color 0.15s, transform 0.15s",
-        }}
+        className="panel"
+        style={{ cursor: "pointer", transition: "box-shadow 0.18s, transform 0.18s", overflow: "hidden" }}
         onMouseEnter={e => {
-          (e.currentTarget as HTMLDivElement).style.borderColor = "var(--border-bright)";
-          (e.currentTarget as HTMLDivElement).style.transform = "translateY(-1px)";
+          (e.currentTarget as HTMLDivElement).style.boxShadow = "0 4px 16px rgba(0,87,210,0.15)";
+          (e.currentTarget as HTMLDivElement).style.transform = "translateY(-2px)";
         }}
         onMouseLeave={e => {
-          (e.currentTarget as HTMLDivElement).style.borderColor = "var(--border)";
+          (e.currentTarget as HTMLDivElement).style.boxShadow = "0 1px 4px rgba(0,0,0,0.07)";
           (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
         }}
       >
-        {/* Header row */}
-        <div style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: "10px 14px 8px",
-          borderBottom: "1px solid var(--border)",
-        }}>
-          <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
-            <span style={{ fontSize: 15, fontWeight: 700, color: "var(--text-primary)" }}>{company.ticker}</span>
-            <span style={{ fontSize: 10, color: "var(--text-muted)" }}>{company.exchange}</span>
-          </div>
-          <RecBadge rec={company.recommendation} />
-        </div>
+        {/* Blue accent top strip */}
+        <div style={{ height: 3, background: "linear-gradient(90deg, #0057d2, #3b8ef3)" }} />
 
-        <div style={{ padding: "10px 14px 12px" }}>
-          {/* Company name + metadata */}
-          <div style={{ fontSize: 11, color: "var(--text-secondary)", marginBottom: 10 }}>
-            {company.name}
-          </div>
-          <div style={{ display: "flex", gap: 6, marginBottom: 12 }}>
-            <span style={{ fontSize: 9, background: "var(--bg-secondary)", border: "1px solid var(--border)", borderRadius: 2, padding: "1px 5px", color: "var(--text-muted)", letterSpacing: "0.08em" }}>
-              {company.sector}
-            </span>
-            <span style={{ fontSize: 9, background: "var(--bg-secondary)", border: "1px solid var(--border)", borderRadius: 2, padding: "1px 5px", color: "var(--text-muted)", letterSpacing: "0.08em" }}>
-              {company.country}
-            </span>
-          </div>
-
-          {/* Price / Base / Upside grid */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8, marginBottom: 10 }}>
+        <div style={{ padding: "14px 16px 16px" }}>
+          {/* Header row */}
+          <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 4 }}>
             <div>
-              <div className="data-label" style={{ marginBottom: 2 }}>Price</div>
-              <div className="data-value" style={{ color: "var(--accent-amber)", fontSize: 14 }}>
-                {company.currency === "USD" ? "$" : ""}{company.price.toFixed(2)}
+              <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
+                <span style={{ fontSize: 18, fontWeight: 700, color: "#1d2d3e", fontFamily: "'IBM Plex Sans', sans-serif" }}>
+                  {company.ticker}
+                </span>
+                <span style={{ fontSize: 11, color: "#8696a9", fontWeight: 500 }}>{company.exchange}</span>
               </div>
+              <div style={{ fontSize: 12, color: "#556b82", marginTop: 1 }}>{company.name}</div>
             </div>
-            <div>
-              <div className="data-label" style={{ marginBottom: 2 }}>Base IV</div>
-              <div className="data-value" style={{ color: "var(--accent-green)", fontSize: 14 }}>
-                ${company.baseValue.toFixed(2)}
-              </div>
-            </div>
-            <div>
-              <div className="data-label" style={{ marginBottom: 2 }}>Upside IV</div>
-              <div className="data-value" style={{ color: "var(--accent-purple)", fontSize: 14 }}>
-                ${company.upsideValue.toFixed(2)}
-              </div>
-            </div>
+            <RecBadge rec={company.recommendation} />
           </div>
 
-          {/* Visual bar */}
-          <UpsideBar price={company.price} base={company.baseValue} upside={company.upsideValue} />
+          {/* Tags */}
+          <div style={{ display: "flex", gap: 6, marginTop: 8, marginBottom: 4, flexWrap: "wrap" }}>
+            {[company.sector, company.country].map(tag => (
+              <span key={tag} style={{
+                fontSize: 10, padding: "2px 7px",
+                background: "#eaf2ff", color: "#0057d2",
+                border: "1px solid #c8dcf8", borderRadius: 3,
+                fontWeight: 500, fontFamily: "'IBM Plex Sans', sans-serif",
+              }}>
+                {tag}
+              </span>
+            ))}
+          </div>
 
-          {/* Upside % */}
-          <div style={{ marginTop: 8, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <span style={{ fontSize: 9, color: "var(--text-muted)" }}>
-              As of {company.asOfDate}
-            </span>
-            <span style={{ fontSize: 11, fontWeight: 600, color: upsideColor }}>
-              {company.upsideToBase >= 0 ? "+" : ""}{company.upsideToBase.toFixed(1)}% to base
+          {/* Valuation bar */}
+          <ValuationBar price={company.price} base={company.baseValue} upside={company.upsideValue} />
+
+          {/* Footer */}
+          <div style={{
+            display: "flex", justifyContent: "space-between", alignItems: "center",
+            marginTop: 12, paddingTop: 10,
+            borderTop: "1px solid #f0f0f0",
+          }}>
+            <span style={{ fontSize: 10, color: "#8696a9" }}>As of {company.asOfDate}</span>
+            <span style={{ fontSize: 12, fontWeight: 700, color: upsideColor, fontFamily: "'IBM Plex Mono', monospace" }}>
+              {upside >= 0 ? "+" : ""}{upside.toFixed(1)}% to base
             </span>
           </div>
         </div>

@@ -1,129 +1,170 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&family=DM+Mono:wght@300;400;500&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ─── SAP Horizon Design Tokens ──────────────────────────────────────────── */
+/* ── Design Tokens ─────────────────────────────────────────────────────────── */
 :root {
-  --shell-bg:        #ffffff;
-  --page-bg:         #f5f6f7;
-  --panel-bg:        #ffffff;
-  --panel-bg-hover:  #f0f4ff;
-  --border-subtle:   #e5e7eb;
-  --border-medium:   #d1d5db;
-  --border-strong:   #9ca3af;
-
-  /* SAP Blue family */
-  --sap-blue-1:      #0057d2;
-  --sap-blue-2:      #0a6ed1;
-  --sap-blue-3:      #1b74e4;
-  --sap-blue-4:      #3b8ef3;
-  --sap-blue-5:      #c8dcf8;
-  --sap-blue-6:      #eaf2ff;
-
-  /* Semantic */
-  --positive:        #107e3e;
-  --positive-bg:     #f0faf5;
-  --positive-border: #a3d9b8;
-  --critical:        #bb0000;
-  --critical-bg:     #fff5f5;
-  --critical-border: #f5c0c0;
-  --warning:         #e76500;
-  --warning-bg:      #fff8f0;
-  --warning-border:  #f9c784;
+  /* Base surfaces */
+  --bg:           #0a0f1e;
+  --bg-elevated:  #0f1629;
+  --bg-card:      rgba(255,255,255,0.04);
+  --bg-card-hover:rgba(255,255,255,0.07);
+  --glass:        rgba(255,255,255,0.05);
+  --glass-border: rgba(255,255,255,0.10);
+  --glass-shine:  rgba(255,255,255,0.15);
 
   /* Text */
-  --text-primary:    #1d2d3e;
-  --text-secondary:  #556b82;
-  --text-muted:      #8696a9;
+  --text-1: #f0f4ff;
+  --text-2: #8b9cc8;
+  --text-3: #4a5578;
 
-  --font-body: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
-  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+  /* Accents — Apple-inspired */
+  --blue:         #2997ff;
+  --blue-dim:     rgba(41,151,255,0.15);
+  --blue-glow:    rgba(41,151,255,0.30);
+  --green:        #30d158;
+  --green-dim:    rgba(48,209,88,0.15);
+  --red:          #ff453a;
+  --red-dim:      rgba(255,69,58,0.15);
+  --amber:        #ff9f0a;
+  --amber-dim:    rgba(255,159,10,0.15);
+  --purple:       #bf5af2;
 
-  --radius-sm: 4px;
-  --radius-md: 6px;
-  --shadow-sm: 0 1px 4px rgba(0,0,0,0.07);
-  --shadow-md: 0 2px 8px rgba(0,0,0,0.09);
+  /* Borders */
+  --border:       rgba(255,255,255,0.08);
+  --border-bright:rgba(255,255,255,0.16);
+
+  /* Typography */
+  --font:  'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono:  'DM Mono', 'SF Mono', monospace;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-*, *::before, *::after { box-sizing: border-box; }
-html { font-size: 14px; }
+/* ── Reset ─────────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 14px; scroll-behavior: smooth; }
 
 body {
-  font-family: var(--font-body);
-  background: var(--page-bg);
-  color: var(--text-primary);
-  margin: 0; padding: 0;
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text-1);
   -webkit-font-smoothing: antialiased;
-  line-height: 1.5;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  /* Subtle radial gradient background */
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(41,151,255,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 90% 80%, rgba(191,90,242,0.05) 0%, transparent 50%);
+  background-attachment: fixed;
 }
 
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: var(--page-bg); }
-::-webkit-scrollbar-thumb { background: var(--border-medium); border-radius: 3px; }
+/* ── Scrollbar ─────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 3px; }
 
-@keyframes fadeSlideIn {
-  from { opacity: 0; transform: translateY(6px); }
+/* ── Animations ────────────────────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.fade-in { animation: fadeSlideIn 0.28s ease-out forwards; }
-.stagger > * { opacity: 0; animation: fadeSlideIn 0.28s ease-out forwards; }
-.stagger > *:nth-child(1) { animation-delay: 0.04s; }
-.stagger > *:nth-child(2) { animation-delay: 0.08s; }
-.stagger > *:nth-child(3) { animation-delay: 0.12s; }
-.stagger > *:nth-child(4) { animation-delay: 0.16s; }
-.stagger > *:nth-child(5) { animation-delay: 0.20s; }
-.stagger > *:nth-child(6) { animation-delay: 0.24s; }
-
-.panel {
-  background: var(--panel-bg);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
+@keyframes shimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.8); }
+}
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
-.panel-header {
-  display: flex; align-items: center; gap: 8px;
-  padding: 10px 16px;
-  border-bottom: 1px solid var(--border-subtle);
-  font-size: 11px; font-weight: 700;
-  letter-spacing: 0.06em; text-transform: uppercase;
-  color: var(--text-secondary);
-  background: #f8f9fa;
-  border-radius: 6px 6px 0 0;
+.fade-up { animation: fadeUp 0.5s var(--ease-out) forwards; }
+.stagger > * { opacity: 0; animation: fadeUp 0.45s var(--ease-out) forwards; }
+.stagger > *:nth-child(1) { animation-delay: 0.05s; }
+.stagger > *:nth-child(2) { animation-delay: 0.10s; }
+.stagger > *:nth-child(3) { animation-delay: 0.15s; }
+.stagger > *:nth-child(4) { animation-delay: 0.20s; }
+.stagger > *:nth-child(5) { animation-delay: 0.25s; }
+.stagger > *:nth-child(6) { animation-delay: 0.30s; }
+
+/* ── Glass card ────────────────────────────────────────────────────────────── */
+.glass-card {
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  position: relative;
+  overflow: hidden;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s var(--ease-out), box-shadow 0.2s;
+}
+.glass-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, transparent 50%);
+  pointer-events: none;
+}
+.glass-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-bright);
+  transform: translateY(-2px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px var(--glass-shine) inset;
 }
 
-.data-label {
-  font-size: 10px; font-weight: 600;
-  letter-spacing: 0.05em; text-transform: uppercase;
-  color: var(--text-muted);
-}
-.data-value {
-  font-size: 15px; font-weight: 700;
-  color: var(--text-primary);
-  font-family: var(--font-mono);
+/* ── Panel header ──────────────────────────────────────────────────────────── */
+.section-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-3);
 }
 
-.terminal-table { width: 100%; border-collapse: collapse; font-size: 12px; }
-.terminal-table th {
-  font-size: 10px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
-  color: var(--text-muted); padding: 8px 12px; text-align: right;
-  border-bottom: 2px solid var(--border-subtle); background: #f8f9fa; white-space: nowrap;
+/* ── Ticker scrollbar ──────────────────────────────────────────────────────── */
+.ticker-wrap {
+  overflow: hidden;
+  white-space: nowrap;
+  mask-image: linear-gradient(90deg, transparent 0%, black 4%, black 96%, transparent 100%);
 }
-.terminal-table th:first-child { text-align: left; }
-.terminal-table td {
-  padding: 7px 12px; text-align: right;
-  border-bottom: 1px solid var(--border-subtle);
-  color: var(--text-secondary); font-family: var(--font-mono); font-size: 12px;
+.ticker-inner {
+  display: inline-flex;
+  animation: ticker-scroll 40s linear infinite;
 }
-.terminal-table td:first-child { text-align: left; color: var(--text-primary); font-family: var(--font-body); font-weight: 500; }
-.terminal-table tbody tr:hover td { background: var(--sap-blue-6); }
-.terminal-table .positive { color: var(--positive); font-weight: 600; }
-.terminal-table .negative { color: var(--critical); font-weight: 600; }
+.ticker-inner:hover { animation-play-state: paused; }
 
-.recharts-text { fill: var(--text-muted) !important; font-size: 11px !important; font-family: var(--font-body) !important; }
+/* ── Table ─────────────────────────────────────────────────────────────────── */
+.val-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.val-table th {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--text-3);
+  padding: 8px 14px; text-align: right;
+  border-bottom: 1px solid var(--border);
+}
+.val-table th:first-child { text-align: left; }
+.val-table td {
+  padding: 9px 14px; text-align: right;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  color: var(--text-2); font-family: var(--mono); font-size: 12px;
+}
+.val-table td:first-child { text-align: left; color: var(--text-1); font-family: var(--font); font-weight: 500; }
+.val-table tbody tr { transition: background 0.15s; }
+.val-table tbody tr:hover td { background: rgba(255,255,255,0.03); }
+.val-table .pos { color: var(--green); font-weight: 600; }
+.val-table .neg { color: var(--red); font-weight: 600; }
+
+/* ── Recharts ──────────────────────────────────────────────────────────────── */
+.recharts-text { fill: var(--text-3) !important; font-size: 10px !important; font-family: var(--font) !important; }
 .recharts-cartesian-grid-horizontal line,
-.recharts-cartesian-grid-vertical line { stroke: var(--border-subtle) !important; }
+.recharts-cartesian-grid-vertical line { stroke: rgba(255,255,255,0.05) !important; }
+.recharts-tooltip-wrapper { font-family: var(--font) !important; }
 
-a { color: var(--sap-blue-1); text-decoration: none; }
-a:hover { text-decoration: underline; }
+a { color: var(--blue); text-decoration: none; }

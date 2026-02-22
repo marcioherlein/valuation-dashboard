@@ -8,8 +8,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        mono: ["'IBM Plex Mono'", "monospace"],
-        sans: ["'IBM Plex Sans'", "sans-serif"],
+        sans: ["'DM Sans'", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
+        mono: ["'DM Mono'", "'SF Mono'", "monospace"],
       },
     },
   },

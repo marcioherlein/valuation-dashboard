@@ -4,15 +4,13 @@ import { useState, useEffect } from "react";
 
 export default function TopBar() {
   const [time, setTime] = useState("");
+  const [date, setDate] = useState("");
 
   useEffect(() => {
     const update = () => {
       const now = new Date();
-      setTime(
-        now.toLocaleDateString("en-US", { day: "2-digit", month: "short", year: "numeric" }) +
-        " · " +
-        now.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false })
-      );
+      setTime(now.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false }));
+      setDate(now.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" }));
     };
     update();
     const id = setInterval(update, 30000);
@@ -21,55 +19,76 @@ export default function TopBar() {
 
   return (
     <header style={{
-      background: "#0057d2",
-      height: 44,
+      background: "rgba(10,15,30,0.85)",
+      backdropFilter: "blur(20px)",
+      WebkitBackdropFilter: "blur(20px)",
+      borderBottom: "1px solid rgba(255,255,255,0.07)",
+      height: 52,
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
-      padding: "0 24px",
+      padding: "0 28px",
       position: "sticky",
       top: 0,
-      zIndex: 100,
-      boxShadow: "0 2px 6px rgba(0,87,210,0.30)",
+      zIndex: 200,
     }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+      {/* Logo */}
+      <Link href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: 10 }}>
         <div style={{
-          background: "#ffffff",
-          borderRadius: 4,
-          padding: "2px 8px",
-          fontSize: 12,
-          fontWeight: 800,
-          color: "#0057d2",
-          fontFamily: "'IBM Plex Sans', sans-serif",
-          letterSpacing: "0.05em",
+          width: 28, height: 28,
+          background: "linear-gradient(135deg, var(--blue), var(--purple))",
+          borderRadius: 8,
+          display: "flex", alignItems: "center", justifyContent: "center",
+          fontSize: 12, fontWeight: 800, color: "#fff",
+          letterSpacing: "-0.02em",
+          boxShadow: "0 0 16px rgba(41,151,255,0.4)",
         }}>
-          VAL-X
+          V
         </div>
-        <div style={{ width: 1, height: 18, background: "rgba(255,255,255,0.3)" }} />
-        <Link href="/" style={{
-          fontSize: 13,
-          fontWeight: 500,
-          color: "rgba(255,255,255,0.95)",
-          textDecoration: "none",
-          fontFamily: "'IBM Plex Sans', sans-serif",
-        }}>
-          Equity Coverage Universe
-        </Link>
+        <div>
+          <span style={{ fontSize: 15, fontWeight: 700, color: "var(--text-1)", letterSpacing: "-0.02em" }}>
+            VAL
+          </span>
+          <span style={{ fontSize: 15, fontWeight: 300, color: "var(--text-2)", letterSpacing: "-0.01em" }}>
+            -X
+          </span>
+        </div>
+      </Link>
+
+      {/* Nav pills */}
+      <div style={{ display: "flex", gap: 2 }}>
+        {[
+          { label: "Markets", href: "#markets" },
+          { label: "Coverage", href: "#coverage" },
+        ].map(item => (
+          <a key={item.label} href={item.href} style={{
+            fontSize: 12, fontWeight: 500, color: "var(--text-2)",
+            padding: "5px 14px", borderRadius: 20,
+            background: "transparent", textDecoration: "none",
+            transition: "all 0.15s",
+          }}
+            onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = "var(--text-1)"; (e.currentTarget as HTMLAnchorElement).style.background = "rgba(255,255,255,0.06)"; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = "var(--text-2)"; (e.currentTarget as HTMLAnchorElement).style.background = "transparent"; }}
+          >
+            {item.label}
+          </a>
+        ))}
       </div>
-      <div style={{ display: "flex", alignItems: "center", gap: 16, fontSize: 11, fontFamily: "'IBM Plex Sans', sans-serif" }}>
+
+      {/* Right side */}
+      <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
         <span style={{
-          background: "rgba(255,255,255,0.15)",
-          border: "1px solid rgba(255,255,255,0.3)",
-          borderRadius: 3,
-          padding: "2px 8px",
-          fontSize: 10,
-          fontWeight: 600,
-          color: "rgba(255,255,255,0.9)",
-          letterSpacing: "0.04em",
+          fontSize: 10, fontWeight: 600, color: "var(--amber)",
+          background: "var(--amber-dim)",
+          border: "1px solid rgba(255,159,10,0.25)",
+          borderRadius: 6, padding: "3px 8px", letterSpacing: "0.04em",
         }}>
-          EDUCATIONAL · NOT INVESTMENT ADVICE
+          Educational · Not Investment Advice
         </span>
-        <span style={{ color: "rgba(255,255,255,0.75)" }}>{time}</span>
+        <div style={{ textAlign: "right" }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: "var(--text-1)", fontFamily: "var(--mono)" }}>{time}</div>
+          <div style={{ fontSize: 9, color: "var(--text-3)" }}>{date}</div>
+        </div>
       </div>
     </header>
   );

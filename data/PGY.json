@@ -1,0 +1,180 @@
+{
+  "id": "PGY",
+  "name": "Pagaya Technologies Ltd.",
+  "ticker": "PGY",
+  "exchange": "NASDAQ",
+  "instrument": "Class A ordinary shares (economically equivalent to Class B; Class B not listed)",
+  "currency": "USD",
+  "asOfDate": "2026-02-21",
+  "price": 11.89,
+  "recommendation": "HOLD",
+  "moSRule": {
+    "minMarginOfSafetyPct": 20,
+    "buyBelow": 10.84
+  },
+  "valuation": {
+    "base": 13.55,
+    "upside": 19.42,
+    "downside": 5.15,
+    "upsideToBasePct": 13.9,
+    "upsideToBullPct": 63.3,
+    "downsideToBearPct": -56.7,
+    "mosBuyBelow": 10.84,
+    "mosPct": 20
+  },
+  "discountRates": {
+    "riskFreeRate": 4.08,
+    "equityRiskPremium": 4.23,
+    "beta": 5.88,
+    "costOfEquity": 28.95,
+    "preTaxCostOfDebt": 8.45,
+    "taxRate": 23.0,
+    "wacc": 18.69,
+    "terminalGrowth": 4.0
+  },
+  "shareCount": {
+    "classAOutstanding": 68839327,
+    "classBOutstanding": 11288577,
+    "ordinarySharesOutstandingTotal": 80127904,
+    "dilutedWeightedAvg9M": 80945983
+  },
+  "capitalStructure": {
+    "cashAndRestricted_m": 264.8,
+    "debt_m": 767.5,
+    "leases_m": 35.0,
+    "redeemablePreferred_m": 30.1,
+    "warrantLiability_m": 7.4,
+    "nonControllingInterests_m": 97.5
+  },
+  "bridge": {
+    "bear": {
+      "enterpriseValue": 1089.5,
+      "cashAndRestricted": 264.8,
+      "debt": 767.5,
+      "leases": 35.0,
+      "redeemablePreferred": 30.1,
+      "warrantLiability": 7.4,
+      "nonControllingInterests": 97.5,
+      "equityValue": 416.8,
+      "terminalPVSharePct": 34.0
+    },
+    "base": {
+      "enterpriseValue": 1769.3,
+      "cashAndRestricted": 264.8,
+      "debt": 767.5,
+      "leases": 35.0,
+      "redeemablePreferred": 30.1,
+      "warrantLiability": 7.4,
+      "nonControllingInterests": 97.5,
+      "equityValue": 1096.6,
+      "terminalPVSharePct": 28.6
+    },
+    "bull": {
+      "enterpriseValue": 2244.6,
+      "cashAndRestricted": 264.8,
+      "debt": 767.5,
+      "leases": 35.0,
+      "redeemablePreferred": 30.1,
+      "warrantLiability": 7.4,
+      "nonControllingInterests": 97.5,
+      "equityValue": 1571.9,
+      "terminalPVSharePct": 25.8
+    }
+  },
+  "scenarios": {
+    "base": {
+      "assumptions": {
+        "revenueGrowthPathPct": [18.0, 14.0, 11.0, 9.0, 7.0, 6.0, 5.0, 4.7, 4.3, 4.0],
+        "ebitMarginPathPct": [17.8, 18.2, 18.5, 18.8, 19.0, 19.2, 19.3, 19.0, 18.5, 18.0],
+        "nwcPctRevenue": 10.0,
+        "daPctRevenue": 2.57,
+        "capexPctRevenue": 1.22
+      },
+      "forecast": [
+        { "year": 2026, "revenue": 1434.8, "ebit": 255.4, "fcff": 194.2, "pvFCFF": 163.6 },
+        { "year": 2027, "revenue": 1635.7, "ebit": 297.7, "fcff": 231.3, "pvFCFF": 164.2 },
+        { "year": 2028, "revenue": 1815.7, "ebit": 335.9, "fcff": 265.2, "pvFCFF": 158.6 },
+        { "year": 2029, "revenue": 1979.1, "ebit": 372.1, "fcff": 296.9, "pvFCFF": 149.6 },
+        { "year": 2030, "revenue": 2117.6, "ebit": 402.3, "fcff": 324.6, "pvFCFF": 137.8 },
+        { "year": 2031, "revenue": 2244.7, "ebit": 431.0, "fcff": 349.5, "pvFCFF": 125.0 },
+        { "year": 2032, "revenue": 2356.9, "ebit": 454.9, "fcff": 370.9, "pvFCFF": 111.8 },
+        { "year": 2033, "revenue": 2467.7, "ebit": 468.9, "fcff": 383.3, "pvFCFF": 97.3 },
+        { "year": 2034, "revenue": 2573.8, "ebit": 476.1, "fcff": 390.8, "pvFCFF": 83.6 },
+        { "year": 2035, "revenue": 2676.7, "ebit": 481.8, "fcff": 396.9, "pvFCFF": 71.5 }
+      ],
+      "sensitivity": {
+        "waccMinus100bps": 15.24,
+        "waccPlus100bps": 12.07
+      }
+    },
+    "upside": {
+      "assumptions": {
+        "revenueGrowthPathPct": [24.0, 18.0, 14.0, 11.0, 9.0, 7.0, 6.0, 5.0, 4.5, 4.0],
+        "ebitMarginPathPct": [19.0, 20.0, 20.5, 21.0, 21.5, 22.0, 22.0, 21.5, 20.5, 20.0],
+        "nwcPctRevenue": 9.5,
+        "daPctRevenue": 2.57,
+        "capexPctRevenue": 1.22
+      },
+      "forecast": [
+        { "year": 2026, "revenue": 1507.9, "ebit": 286.5, "fcff": 225.4, "pvFCFF": 190.0 },
+        { "year": 2027, "revenue": 1779.3, "ebit": 355.9, "fcff": 290.2, "pvFCFF": 206.0 },
+        { "year": 2028, "revenue": 2028.4, "ebit": 416.8, "fcff": 349.8, "pvFCFF": 209.2 },
+        { "year": 2029, "revenue": 2251.5, "ebit": 472.8, "fcff": 406.8, "pvFCFF": 205.1 },
+        { "year": 2030, "revenue": 2454.1, "ebit": 527.6, "fcff": 460.6, "pvFCFF": 195.6 },
+        { "year": 2031, "revenue": 2625.9, "ebit": 577.7, "fcff": 508.2, "pvFCFF": 181.7 },
+        { "year": 2032, "revenue": 2783.5, "ebit": 612.4, "fcff": 542.7, "pvFCFF": 163.6 },
+        { "year": 2033, "revenue": 2922.7, "ebit": 628.4, "fcff": 560.0, "pvFCFF": 142.1 },
+        { "year": 2034, "revenue": 3054.2, "ebit": 626.1, "fcff": 562.6, "pvFCFF": 120.3 },
+        { "year": 2035, "revenue": 3176.4, "ebit": 635.3, "fcff": 573.3, "pvFCFF": 103.3 }
+      ]
+    },
+    "downside": {
+      "assumptions": {
+        "revenueGrowthPathPct": [10.0, 8.0, 7.0, 6.0, 5.0, 4.5, 4.0, 4.0, 4.0, 4.0],
+        "ebitMarginPathPct": [12.0, 12.5, 13.0, 13.2, 13.5, 13.8, 14.0, 14.0, 14.0, 14.0],
+        "nwcPctRevenue": 11.0,
+        "daPctRevenue": 2.57,
+        "capexPctRevenue": 1.22
+      },
+      "forecast": [
+        { "year": 2026, "revenue": 1337.6, "ebit": 160.5, "fcff": 110.9, "pvFCFF": 93.5 },
+        { "year": 2027, "revenue": 1444.6, "ebit": 180.6, "fcff": 127.3, "pvFCFF": 90.4 },
+        { "year": 2028, "revenue": 1545.7, "ebit": 201.0, "fcff": 143.5, "pvFCFF": 85.8 },
+        { "year": 2029, "revenue": 1638.4, "ebit": 216.3, "fcff": 156.5, "pvFCFF": 78.9 },
+        { "year": 2030, "revenue": 1720.4, "ebit": 232.3, "fcff": 169.3, "pvFCFF": 72.0 },
+        { "year": 2031, "revenue": 1797.8, "ebit": 248.1, "fcff": 181.5, "pvFCFF": 64.9 },
+        { "year": 2032, "revenue": 1869.7, "ebit": 261.8, "fcff": 191.7, "pvFCFF": 57.8 },
+        { "year": 2033, "revenue": 1944.5, "ebit": 272.2, "fcff": 200.3, "pvFCFF": 50.9 },
+        { "year": 2034, "revenue": 2022.3, "ebit": 283.1, "fcff": 209.2, "pvFCFF": 44.8 },
+        { "year": 2035, "revenue": 2103.2, "ebit": 294.5, "fcff": 218.4, "pvFCFF": 39.4 }
+      ]
+    }
+  },
+  "reverseDCF": {
+    "solveFor": "one-variable",
+    "impliedGrowthMultiplierOnBasePath": 0.844,
+    "impliedEBITMarginMultiplierOnBasePath": 0.921,
+    "interpretation": "To justify the current price under the same model structure: either revenue growth averages ~16% lower than Base (multiplier ~0.844) OR EBIT margins average ~8% lower than Base (multiplier ~0.921)."
+  },
+  "catalysts": [
+    "Sustained Network Volume growth translating into higher revenue from fees (quarterly filing disclosures).",
+    "Evidence that post-2024 cost discipline persists (G&A/Revenue and production cost efficiency).",
+    "Stable access to funding/ABS channels (risk-off liquidity is the main external kill-switch)."
+  ],
+  "risks": [
+    { "risk": "Take-rate compression (fee revenue / Network Volume declines)", "modelLine": "Revenue growth / margins" },
+    { "risk": "Production cost mix worsens (FRLPC margin falls)", "modelLine": "Production costs %" },
+    { "risk": "Funding tightening reduces volume conversion / partner economics", "modelLine": "Revenue growth" },
+    { "risk": "Dilution from equity issuance / convertible exchangeables", "modelLine": "Diluted shares" },
+    { "risk": "Non-operating fair-value volatility re-emerges (credit-related marks)", "modelLine": "Equity bridge / confidence" }
+  ],
+  "sourcePack": {
+    "filings": [
+      { "type": "10-Q", "periodEnd": "2025-09-30", "file": "0001883085-25-000195.pdf" },
+      { "type": "10-K", "periodEnd": "2024-12-31", "url": "https://www.sec.gov/Archives/edgar/data/1883085/000188308525000050/pgy-20241231.htm" }
+    ],
+    "marketQuote": { "ticker": "PGY", "price": 11.89, "tradeTimeUTC": "2026-02-21 01:15:00", "source": "OpenAI finance feed" },
+    "betaSource": "Yahoo Finance (Beta 5Y Monthly 5.88)",
+    "engine": "Deterministic Python DCF run based on extracted filing tables"
+  }
+}

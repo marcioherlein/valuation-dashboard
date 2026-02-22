@@ -1,126 +1,94 @@
 import { NextResponse } from "next/server";
 
-// Force this route to always run dynamically — never pre-rendered at build time
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
 const SYMBOLS = [
-  { symbol: "SPY",   label: "S&P 500",      group: "indices" },
-  { symbol: "QQQ",   label: "Nasdaq 100",   group: "indices" },
-  { symbol: "DIA",   label: "Dow Jones",    group: "indices" },
-  { symbol: "^VIX",  label: "VIX",          group: "indices" },
-  { symbol: "XLK",   label: "Technology",   group: "sectors" },
-  { symbol: "XLF",   label: "Financials",   group: "sectors" },
-  { symbol: "XLE",   label: "Energy",       group: "sectors" },
-  { symbol: "XLV",   label: "Healthcare",   group: "sectors" },
-  { symbol: "XLY",   label: "Cons. Disc.",  group: "sectors" },
-  { symbol: "XLI",   label: "Industrials",  group: "sectors" },
-  { symbol: "XLC",   label: "Comm. Svcs.",  group: "sectors" },
-  { symbol: "XLB",   label: "Materials",    group: "sectors" },
-  { symbol: "^MERV", label: "Merval",       group: "global"  },
-  { symbol: "EWZ",   label: "Brazil (EWZ)", group: "global"  },
-  { symbol: "MCHI",  label: "China (MCHI)", group: "global"  },
-  { symbol: "EEM",   label: "EM",           group: "global"  },
+  { symbol: "SPY",   label: "S&P 500",      group: "indices", type: "stock" },
+  { symbol: "QQQ",   label: "Nasdaq 100",   group: "indices", type: "stock" },
+  { symbol: "DIA",   label: "Dow Jones",    group: "indices", type: "stock" },
+  { symbol: "VIXY",  label: "VIX",          group: "indices", type: "stock" },
+  { symbol: "XLK",   label: "Technology",   group: "sectors", type: "stock" },
+  { symbol: "XLF",   label: "Financials",   group: "sectors", type: "stock" },
+  { symbol: "XLE",   label: "Energy",       group: "sectors", type: "stock" },
+  { symbol: "XLV",   label: "Healthcare",   group: "sectors", type: "stock" },
+  { symbol: "XLY",   label: "Cons. Disc.",  group: "sectors", type: "stock" },
+  { symbol: "XLI",   label: "Industrials",  group: "sectors", type: "stock" },
+  { symbol: "XLC",   label: "Comm. Svcs.",  group: "sectors", type: "stock" },
+  { symbol: "XLB",   label: "Materials",    group: "sectors", type: "stock" },
+  { symbol: "ARGT",  label: "Merval (ETF)", group: "global",  type: "stock" },
+  { symbol: "EWZ",   label: "Brazil",       group: "global",  type: "stock" },
+  { symbol: "MCHI",  label: "China",        group: "global",  type: "stock" },
+  { symbol: "EEM",   label: "Em. Markets",  group: "global",  type: "stock" },
 ];
 
-const UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
-
-async function getCookieAndCrumb(): Promise<{ cookie: string; crumb: string } | null> {
+async function fetchFromFinnhub(symbol: string): Promise<{ price: number | null; changePct: number | null; change: number | null }> {
+  // Finnhub free tier — no API key needed for basic quotes via this endpoint
   try {
-    // Step 1: hit Yahoo Finance homepage to get a session cookie
-    const cookieRes = await fetch("https://finance.yahoo.com/", {
-      headers: { "User-Agent": UA, "Accept-Language": "en-US,en;q=0.9" },
-      redirect: "follow",
-    });
-    const setCookie = cookieRes.headers.get("set-cookie") ?? "";
-    // Extract the A3 or similar cookie
-    const cookie = setCookie
-      .split(",")
-      .map((c: string) => c.split(";")[0].trim())
-      .filter((c: string) => c.includes("="))
-      .join("; ");
-
-    // Step 2: get crumb
-    const crumbRes = await fetch("https://query1.finance.yahoo.com/v1/test/getcrumb", {
-      headers: {
-        "User-Agent": UA,
-        "Cookie": cookie,
-        "Accept": "text/plain",
-      },
-    });
-    const crumb = (await crumbRes.text()).trim();
-    if (!crumb || crumb.includes("<")) return null; // HTML = not authed
-
-    return { cookie, crumb };
+    const res = await fetch(
+      `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=demo`,
+      { headers: { "Accept": "application/json" }, signal: AbortSignal.timeout(5000) }
+    );
+    if (!res.ok) return { price: null, changePct: null, change: null };
+    const j = await res.json();
+    if (!j.c || j.c === 0) return { price: null, changePct: null, change: null };
+    return {
+      price: j.c,
+      changePct: j.dp,
+      change: j.d,
+    };
   } catch {
-    return null;
+    return { price: null, changePct: null, change: null };
   }
 }
 
-async function fetchWithCrumb(cookie: string, crumb: string) {
-  const symbolList = SYMBOLS.map(s => encodeURIComponent(s.symbol)).join(",");
-  const url = `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${symbolList}&crumb=${encodeURIComponent(crumb)}&fields=regularMarketPrice,regularMarketChangePercent,regularMarketChange,regularMarketPreviousClose`;
-
-  const res = await fetch(url, {
-    headers: {
-      "User-Agent": UA,
-      "Cookie": cookie,
-      "Accept": "application/json",
-    },
-  });
-  if (!res.ok) throw new Error(`Quote fetch ${res.status}`);
-  return res.json();
+async function fetchFromStooq(symbol: string): Promise<{ price: number | null; changePct: number | null; change: number | null }> {
+  // Stooq — free, no auth, supports ETFs well
+  try {
+    const res = await fetch(
+      `https://stooq.com/q/l/?s=${symbol.toLowerCase()}.us&f=sd2t2ohlcv&h&e=csv`,
+      { signal: AbortSignal.timeout(6000) }
+    );
+    if (!res.ok) return { price: null, changePct: null, change: null };
+    const text = await res.text();
+    const lines = text.trim().split("\n");
+    if (lines.length < 2) return { price: null, changePct: null, change: null };
+    const cols = lines[1].split(",");
+    const close = parseFloat(cols[6]);
+    const open  = parseFloat(cols[4]);
+    if (!close || isNaN(close)) return { price: null, changePct: null, change: null };
+    const change = close - open;
+    const changePct = (change / open) * 100;
+    return { price: close, changePct, change };
+  } catch {
+    return { price: null, changePct: null, change: null };
+  }
 }
 
-async function fetchFallback() {
-  // Fallback: v8 endpoint (sometimes doesn't need crumb)
-  const symbolList = SYMBOLS.map(s => s.symbol).join(",");
-  const url = `https://query2.finance.yahoo.com/v8/finance/quote?symbols=${encodeURIComponent(symbolList)}`;
-  const res = await fetch(url, {
-    headers: { "User-Agent": UA, "Accept": "application/json" },
-  });
-  if (!res.ok) throw new Error(`Fallback ${res.status}`);
-  return res.json();
+async function fetchQuote(symbol: string): Promise<{ price: number | null; changePct: number | null; change: number | null }> {
+  // Try Stooq first (more reliable, no rate limits for ETFs)
+  const stooq = await fetchFromStooq(symbol);
+  if (stooq.price) return stooq;
+  // Fallback to Finnhub demo
+  return fetchFromFinnhub(symbol);
 }
 
 export async function GET() {
-  let quotes: Record<string, unknown>[] = [];
+  // Fetch all in parallel with individual timeouts
+  const results = await Promise.allSettled(
+    SYMBOLS.map(async (s) => {
+      const q = await fetchQuote(s.symbol);
+      return { ...s, ...q };
+    })
+  );
 
-  try {
-    // Try crumb flow first
-    const auth = await getCookieAndCrumb();
-    let json;
-    if (auth) {
-      json = await fetchWithCrumb(auth.cookie, auth.crumb);
-    } else {
-      json = await fetchFallback();
-    }
-    quotes = json?.quoteResponse?.result ?? [];
-  } catch {
-    // Try fallback silently
-    try {
-      const json = await fetchFallback();
-      quotes = json?.quoteResponse?.result ?? [];
-    } catch {
-      // Return empty — client shows error state
-    }
-  }
-
-  const data = SYMBOLS.map(s => {
-    const q = quotes.find((r) => (r as { symbol: string }).symbol === s.symbol) as Record<string, number> | undefined;
-    return {
-      symbol:    s.symbol,
-      label:     s.label,
-      group:     s.group,
-      price:     q?.regularMarketPrice     ?? null,
-      change:    q?.regularMarketChange    ?? null,
-      changePct: q?.regularMarketChangePercent ?? null,
-      prevClose: q?.regularMarketPreviousClose ?? null,
-    };
+  const data = results.map((r, i) => {
+    if (r.status === "fulfilled") return r.value;
+    return { ...SYMBOLS[i], price: null, changePct: null, change: null };
   });
 
   return NextResponse.json(
     { data, timestamp: Date.now() },
-    { headers: { "Cache-Control": "public, s-maxage=60, stale-while-revalidate=30" } }
+    { headers: { "Cache-Control": "public, s-maxage=120, stale-while-revalidate=60" } }
   );
 }

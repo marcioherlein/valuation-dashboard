@@ -1,0 +1,128 @@
+{
+  "id": "MELI",
+  "name": "MercadoLibre, Inc.",
+  "ticker": "MELI",
+  "exchange": "NASDAQ",
+  "instrument": "Common Stock",
+  "sector": "E-commerce / Fintech",
+  "country": "Latin America",
+  "asOfDate": "2026-02-21",
+  "currency": "USD",
+  "price": 1996.87,
+  "sharesOutstanding": 50697182,
+  "marketCap": 101236000000,
+  "recommendation": "AVOID",
+  "thesis": "Elite business, demanding price. This DCF treats lending growth as reinvestment (not free cash). Base intrinsic value is $1,469 (~-26% vs $1,996.87). Bull case $2,433 requires sustained ~30% growth + expanding owner cash generation. Buying here implicitly underwrites near-bull execution.",
+
+  "valuation": {
+    "base": 1469,
+    "upside": 2433,
+    "bear": 1025,
+    "currentPrice": 1996.87,
+    "upsideToBase": -26.4,
+    "upsideToBull": 21.8,
+    "method": "Owner FCFF DCF (credit-aware)",
+    "horizon": 5
+  },
+
+  "discountRate": {
+    "rf": 4.08,
+    "erp": 4.23,
+    "beta": 1.64,
+    "costOfEquity": 11.0,
+    "terminalGrowth": 3.0
+  },
+
+  "reverseDCF": {
+    "impliedTerminalEBITMargin": 18.1,
+    "impliedScaleFactor": 1.29,
+    "interpretation": "At today's EV, the market requires terminal EBIT margin ~18% (vs ~14% base) OR a materially stronger growth path (~28% 5-year revenue CAGR) at low-teens owner cash generation. That's a demanding bar."
+  },
+
+  "bridge": {
+    "cash": 5272000000,
+    "borrowings": 9877000000,
+    "netCash": -4605000000,
+    "mezzanine": 0
+  },
+
+  "multiples": {
+    "evSales2025E": 3.7,
+    "pSales2025E": 3.5,
+    "pBook": 16.2
+  },
+
+  "financials": {
+    "fy2024": {
+      "revenue": 20777000000,
+      "grossProfit": 9577000000,
+      "ebit": 2631000000,
+      "rd": 1934000000,
+      "sga": 3154000000
+    },
+    "quarterly": [
+      { "period": "Q3 2024", "revenue": 5312000000 },
+      { "period": "Q4 2024", "revenue": 6059000000 },
+      { "period": "Q1 2025", "revenue": 5935000000 },
+      { "period": "Q2 2025", "revenue": 6790000000 },
+      { "period": "Q3 2025", "revenue": 7409000000 }
+    ]
+  },
+
+  "scenarios": {
+    "base": {
+      "label": "Base",
+      "intrinsicValue": 1469,
+      "revenueGrowthPath": [25, 22, 18, 15, 12],
+      "ebitMarginPath": [11.5, 11.5, 11.8, 11.8, 11.8],
+      "salestoCapital": 3.0,
+      "forecast": [
+        { "year": 2026, "revenue": 35.78, "ebit": 4.115, "fcff": 3.94, "pvFCFF": 3.55 },
+        { "year": 2027, "revenue": 43.65, "ebit": 5.020, "fcff": 4.80, "pvFCFF": 3.90 },
+        { "year": 2028, "revenue": 51.51, "ebit": 6.079, "fcff": 5.92, "pvFCFF": 4.33 },
+        { "year": 2029, "revenue": 59.23, "ebit": 6.990, "fcff": 6.81, "pvFCFF": 4.49 },
+        { "year": 2030, "revenue": 66.34, "ebit": 7.830, "fcff": 7.63, "pvFCFF": 4.53 }
+      ]
+    },
+    "upside": {
+      "label": "Upside",
+      "intrinsicValue": 2433,
+      "revenueGrowthPath": [33, 26, 22, 19, 16],
+      "ebitMarginPath": [12.0, 13.0, 14.2, 15.0, 15.5],
+      "salestoCapital": 3.2,
+      "forecast": [
+        { "year": 2026, "revenue": 38.00, "ebit": 4.560, "fcff": 3.00, "pvFCFF": 2.73 },
+        { "year": 2027, "revenue": 47.88, "ebit": 6.224, "fcff": 4.26, "pvFCFF": 3.52 },
+        { "year": 2028, "revenue": 58.41, "ebit": 8.294, "fcff": 5.78, "pvFCFF": 4.34 },
+        { "year": 2029, "revenue": 69.51, "ebit": 10.427, "fcff": 7.35, "pvFCFF": 5.02 },
+        { "year": 2030, "revenue": 80.63, "ebit": 12.498, "fcff": 8.89, "pvFCFF": 5.52 }
+      ]
+    }
+  },
+
+  "risks": [
+    { "rank": 1, "title": "Credit losses spike", "detail": "If loss rates rise as the portfolio scales, owner cash margins compress quickly — the reverse DCF breaks fast." },
+    { "rank": 2, "title": "Funding cost pressure", "detail": "Higher funding costs (rates/competition/regulation) squeeze NIMAL and reduce fintech profitability." },
+    { "rank": 3, "title": "Take-rate compression", "detail": "Competitive pressure or regulation reduces commerce/fintech take rates; growth alone won't save the valuation." },
+    { "rank": 4, "title": "Shipping/subsidy creep", "detail": "Lower free shipping thresholds and logistics expansion can structurally depress gross margin." },
+    { "rank": 5, "title": "FX and macro volatility", "detail": "LATAM FX swings distort USD-reported profitability and raise the required discount rate." },
+    { "rank": 6, "title": "Regulatory tightening", "detail": "Payments/banking-like rules increase capital and compliance costs, reducing ROIC." },
+    { "rank": 7, "title": "Reinvestment intensity stays high", "detail": "If growth requires persistent cash absorption (loans receivable + restricted funds), headline FCF overstates owner cash." },
+    { "rank": 8, "title": "Multiple compression", "detail": "If the market reprices risk (higher ERP/WACC), a great operating print can still see the stock fall." }
+  ],
+
+  "catalysts": [
+    "Q4 2025 earnings: margin trajectory + credit quality indicators.",
+    "Evidence that growth continues with stable or improving loss rates.",
+    "Signs logistics unit economics are structurally improving (not just timing).",
+    "Disclosure around capital allocation and long-term credit funding structure."
+  ],
+
+  "managementQuestions": [
+    "What loss-rate / cohort metrics convince you credit growth is scaling safely?",
+    "How do funding costs evolve as credit penetration rises (especially Argentina)?",
+    "What is the long-run 'owner cash' margin after credit reinvestment?",
+    "How durable is take-rate if shipping subsidies increase?",
+    "What regulatory changes could force higher capital buffers or constrain growth?"
+  ]
+}

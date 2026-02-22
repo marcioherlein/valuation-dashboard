@@ -1,0 +1,140 @@
+{
+  "id": "PGY",
+  "name": "Pagaya Technologies Ltd.",
+  "ticker": "PGY",
+  "exchange": "NASDAQ",
+  "instrument": "Class A ordinary shares",
+  "sector": "AI / Fintech",
+  "country": "United States",
+  "asOfDate": "2026-02-21",
+  "currency": "USD",
+  "price": 11.89,
+  "sharesOutstanding": 80127904,
+  "marketCap": 952720000,
+  "recommendation": "HOLD",
+  "thesis": "AI-native credit network at an inflection point. Base IV $13.55 is +14% above current price — but the 20% margin-of-safety buy-below is $10.84. Beta of 5.88 makes this a high-volatility small-cap. HOLD unless price corrects to the MoS threshold.",
+
+  "valuation": {
+    "base": 13.55,
+    "upside": 19.42,
+    "bear": 5.15,
+    "currentPrice": 11.89,
+    "upsideToBase": 13.9,
+    "upsideToBull": 63.3,
+    "method": "WACC DCF (FCFF)",
+    "horizon": 10
+  },
+
+  "discountRate": {
+    "rf": 4.08,
+    "erp": 4.23,
+    "beta": 5.88,
+    "costOfEquity": 28.95,
+    "wacc": 18.69,
+    "preTaxCostOfDebt": 8.45,
+    "taxRate": 23.0,
+    "terminalGrowth": 4.0
+  },
+
+  "reverseDCF": {
+    "impliedGrowthMultiplier": 0.844,
+    "impliedEBITMarginMultiplier": 0.921,
+    "interpretation": "At current price: either revenue growth averages ~16% lower than Base (multiplier 0.844×) OR EBIT margins average ~8% lower than Base (multiplier 0.921×). The market is pricing modest underdelivery vs Base."
+  },
+
+  "bridge": {
+    "cash": 264800000,
+    "borrowings": 767500000,
+    "leases": 35000000,
+    "redeemablePreferred": 30100000,
+    "warrantLiability": 7400000,
+    "nonControllingInterests": 97500000
+  },
+
+  "financials": {
+    "quarterly": [
+      { "period": "Q4 2024", "revenue": 302000000 },
+      { "period": "Q1 2025", "revenue": 320000000 },
+      { "period": "Q2 2025", "revenue": 345000000 },
+      { "period": "Q3 2025", "revenue": 357000000 }
+    ]
+  },
+
+  "scenarios": {
+    "base": {
+      "label": "Base",
+      "intrinsicValue": 13.55,
+      "revenueGrowthPath": [18.0, 14.0, 11.0, 9.0, 7.0, 6.0, 5.0, 4.7, 4.3, 4.0],
+      "ebitMarginPath": [17.8, 18.2, 18.5, 18.8, 19.0, 19.2, 19.3, 19.0, 18.5, 18.0],
+      "forecast": [
+        { "year": 2026, "revenue": 1.435, "ebit": 0.255, "fcff": 0.194, "pvFCFF": 0.164 },
+        { "year": 2027, "revenue": 1.636, "ebit": 0.298, "fcff": 0.231, "pvFCFF": 0.164 },
+        { "year": 2028, "revenue": 1.816, "ebit": 0.336, "fcff": 0.265, "pvFCFF": 0.159 },
+        { "year": 2029, "revenue": 1.979, "ebit": 0.372, "fcff": 0.297, "pvFCFF": 0.150 },
+        { "year": 2030, "revenue": 2.118, "ebit": 0.402, "fcff": 0.325, "pvFCFF": 0.138 },
+        { "year": 2031, "revenue": 2.245, "ebit": 0.431, "fcff": 0.350, "pvFCFF": 0.125 },
+        { "year": 2032, "revenue": 2.357, "ebit": 0.455, "fcff": 0.371, "pvFCFF": 0.112 },
+        { "year": 2033, "revenue": 2.468, "ebit": 0.469, "fcff": 0.383, "pvFCFF": 0.097 },
+        { "year": 2034, "revenue": 2.574, "ebit": 0.476, "fcff": 0.391, "pvFCFF": 0.084 },
+        { "year": 2035, "revenue": 2.677, "ebit": 0.482, "fcff": 0.397, "pvFCFF": 0.072 }
+      ]
+    },
+    "upside": {
+      "label": "Upside",
+      "intrinsicValue": 19.42,
+      "revenueGrowthPath": [24.0, 18.0, 14.0, 11.0, 9.0, 7.0, 6.0, 5.0, 4.5, 4.0],
+      "ebitMarginPath": [19.0, 20.0, 20.5, 21.0, 21.5, 22.0, 22.0, 21.5, 20.5, 20.0],
+      "forecast": [
+        { "year": 2026, "revenue": 1.508, "ebit": 0.287, "fcff": 0.225, "pvFCFF": 0.190 },
+        { "year": 2027, "revenue": 1.779, "ebit": 0.356, "fcff": 0.290, "pvFCFF": 0.206 },
+        { "year": 2028, "revenue": 2.028, "ebit": 0.417, "fcff": 0.350, "pvFCFF": 0.209 },
+        { "year": 2029, "revenue": 2.252, "ebit": 0.473, "fcff": 0.407, "pvFCFF": 0.205 },
+        { "year": 2030, "revenue": 2.454, "ebit": 0.528, "fcff": 0.461, "pvFCFF": 0.196 },
+        { "year": 2031, "revenue": 2.626, "ebit": 0.578, "fcff": 0.508, "pvFCFF": 0.182 },
+        { "year": 2032, "revenue": 2.784, "ebit": 0.612, "fcff": 0.543, "pvFCFF": 0.164 },
+        { "year": 2033, "revenue": 2.923, "ebit": 0.628, "fcff": 0.560, "pvFCFF": 0.142 },
+        { "year": 2034, "revenue": 3.054, "ebit": 0.626, "fcff": 0.563, "pvFCFF": 0.120 },
+        { "year": 2035, "revenue": 3.176, "ebit": 0.635, "fcff": 0.573, "pvFCFF": 0.103 }
+      ]
+    },
+    "downside": {
+      "label": "Downside",
+      "intrinsicValue": 5.15,
+      "revenueGrowthPath": [10.0, 8.0, 7.0, 6.0, 5.0, 4.5, 4.0, 4.0, 4.0, 4.0],
+      "ebitMarginPath": [12.0, 12.5, 13.0, 13.2, 13.5, 13.8, 14.0, 14.0, 14.0, 14.0],
+      "forecast": [
+        { "year": 2026, "revenue": 1.338, "ebit": 0.161, "fcff": 0.111, "pvFCFF": 0.094 },
+        { "year": 2027, "revenue": 1.445, "ebit": 0.181, "fcff": 0.127, "pvFCFF": 0.090 },
+        { "year": 2028, "revenue": 1.546, "ebit": 0.201, "fcff": 0.144, "pvFCFF": 0.086 },
+        { "year": 2029, "revenue": 1.638, "ebit": 0.216, "fcff": 0.157, "pvFCFF": 0.079 },
+        { "year": 2030, "revenue": 1.720, "ebit": 0.232, "fcff": 0.169, "pvFCFF": 0.072 },
+        { "year": 2031, "revenue": 1.798, "ebit": 0.248, "fcff": 0.182, "pvFCFF": 0.065 },
+        { "year": 2032, "revenue": 1.870, "ebit": 0.262, "fcff": 0.192, "pvFCFF": 0.058 },
+        { "year": 2033, "revenue": 1.945, "ebit": 0.272, "fcff": 0.200, "pvFCFF": 0.051 },
+        { "year": 2034, "revenue": 2.022, "ebit": 0.283, "fcff": 0.209, "pvFCFF": 0.045 },
+        { "year": 2035, "revenue": 2.103, "ebit": 0.295, "fcff": 0.218, "pvFCFF": 0.039 }
+      ]
+    }
+  },
+
+  "risks": [
+    { "rank": 1, "title": "Take-rate compression", "detail": "Fee revenue / Network Volume declining would directly reduce revenue growth and margins." },
+    { "rank": 2, "title": "Production cost worsening", "detail": "FRLPC margin falling would compress EBIT faster than top-line growth can offset." },
+    { "rank": 3, "title": "Funding tightening", "detail": "Risk-off liquidity is the key external kill-switch — reduces volume conversion and partner economics." },
+    { "rank": 4, "title": "Dilution risk", "detail": "Equity issuance or convertible exchangeables could significantly increase diluted share count." },
+    { "rank": 5, "title": "Fair-value volatility", "detail": "Non-operating credit-related marks can swing reported earnings and undermine investor confidence." }
+  ],
+
+  "catalysts": [
+    "Sustained Network Volume growth translating into higher fee revenue (quarterly filing disclosures).",
+    "Evidence that post-2024 cost discipline persists (G&A/Revenue and production cost efficiency).",
+    "Stable access to funding/ABS channels — risk-off liquidity is the main external kill-switch."
+  ],
+
+  "managementQuestions": [
+    "What is the trajectory of take-rate (fee revenue / Network Volume) quarter-over-quarter?",
+    "How is production cost per unit trending as volume scales?",
+    "What is the pipeline of new lending partners and what ABS conditions are you seeing?",
+    "Can you quantify the dilution runway from existing equity compensation plans?"
+  ]
+}

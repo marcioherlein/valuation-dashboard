@@ -11,7 +11,37 @@
     "baseValue": 6.79,
     "upsideValue": 13.12,
     "upsideToBase": 33.9,
-    "asOfDate": "2026-02-20",
+    "asOfDate": "2026-02-21",
+    "currency": "USD"
+  },
+  {
+    "id": "PGY",
+    "name": "Pagaya Technologies Ltd.",
+    "ticker": "PGY",
+    "exchange": "NASDAQ",
+    "sector": "AI / Fintech",
+    "country": "United States",
+    "recommendation": "HOLD",
+    "price": 11.89,
+    "baseValue": 13.55,
+    "upsideValue": 19.42,
+    "upsideToBase": 13.9,
+    "asOfDate": "2026-02-21",
+    "currency": "USD"
+  },
+  {
+    "id": "MELI",
+    "name": "MercadoLibre, Inc.",
+    "ticker": "MELI",
+    "exchange": "NASDAQ",
+    "sector": "E-commerce / Fintech",
+    "country": "Latin America",
+    "recommendation": "AVOID",
+    "price": 1996.87,
+    "baseValue": 1469.0,
+    "upsideValue": 2433.0,
+    "upsideToBase": -26.4,
+    "asOfDate": "2026-02-21",
     "currency": "USD"
   }
 ]

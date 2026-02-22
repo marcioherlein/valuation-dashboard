@@ -1,0 +1,17 @@
+[
+  {
+    "id": "NIO",
+    "name": "NIO Inc.",
+    "ticker": "NIO",
+    "exchange": "NYSE",
+    "sector": "Electric Vehicles",
+    "country": "China",
+    "recommendation": "AVOID",
+    "price": 5.07,
+    "baseValue": 6.79,
+    "upsideValue": 13.12,
+    "upsideToBase": 33.9,
+    "asOfDate": "2026-02-20",
+    "currency": "USD"
+  }
+]

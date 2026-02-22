@@ -1,0 +1,149 @@
+{
+  "id": "NIO",
+  "name": "NIO Inc.",
+  "ticker": "NIO",
+  "exchange": "NYSE",
+  "instrument": "ADS",
+  "adrRatio": "1 ADS = 1 Class A ordinary share",
+  "sector": "Electric Vehicles",
+  "country": "China",
+  "asOfDate": "2026-02-20",
+  "currency": "USD",
+  "price": 5.07,
+  "sharesOutstanding": 2430000000,
+  "marketCap": 10655000000,
+  "recommendation": "AVOID",
+  "thesis": "High-variance turnaround. The stock embeds skepticism about sustained operating profitability. If NIO reaches durable operating margins without constant dilution, the equity can re-rate sharply. If it doesn't, equity value gets crushed by cash burn and financing.",
+  "valuation": {
+    "base": 6.79,
+    "upside": 13.12,
+    "bear": null,
+    "currentPrice": 5.07,
+    "upsideToBase": 33.9,
+    "upsideToBull": 158.8,
+    "terminalPVShareBase": 70.0,
+    "terminalPVShareBull": 61.8,
+    "method": "FCFF DCF",
+    "horizon": 15
+  },
+  "reverseDCF": {
+    "impliedTerminalEBITMargin": 5.11,
+    "impliedScaleFactor": 0.413,
+    "interpretation": "Market implies ~5.1% terminal EBIT margin (holding Base growth path), or delivery growth that's only 41% of the Base scenario. Either way — modest expectations."
+  },
+  "discountRate": {
+    "rf": 4.08,
+    "erp": 5.14,
+    "beta": 1.11,
+    "costOfEquity": 9.785,
+    "terminalGrowth": 3.0,
+    "fxRMBtoUSD": 6.9087
+  },
+  "bridge": {
+    "cash": 5738000000,
+    "borrowings": 2818000000,
+    "netCash": 2920000000,
+    "mezzanine": 1020000000
+  },
+  "multiples": {
+    "evSales2025E": 0.83,
+    "pSales2025E": 0.99,
+    "pBook": 23.2
+  },
+  "keyDrivers": {
+    "deliveries2025": 326028,
+    "deliveriesGrowthYoY": 46.9,
+    "q4Deliveries": 124807,
+    "jan2026Deliveries": 27182,
+    "jan2026GrowthYoY": 96.1,
+    "revenuePerVehicle2025E": 37005,
+    "fy2025RevenueProxy": 12064800000
+  },
+  "financials": {
+    "fy2024": {
+      "revenue": 9515000000,
+      "grossProfit": 939000000,
+      "ebit": -3165000000,
+      "rd": 1887000000,
+      "sga": 2278000000
+    },
+    "quarterly": [
+      { "period": "Q1 2025", "revenue": 1658400000 },
+      { "period": "Q2 2025", "revenue": 2653500000 },
+      { "period": "Q3 2025", "revenue": 3061400000 },
+      { "period": "Q4 2025E", "revenue": 4691500000 }
+    ]
+  },
+  "breakeven": {
+    "q3PositiveOpCashFlow": true,
+    "q4GAAPOpProfitRangeLow": 29000000,
+    "q4GAAPOpProfitRangeHigh": 100000000,
+    "q4NonGAAPOpProfitRangeLow": 100000000,
+    "q4NonGAAPOpProfitRangeHigh": 172000000
+  },
+  "scenarios": {
+    "base": {
+      "label": "Base",
+      "intrinsicValue": 6.79,
+      "deliveryGrowthPath": [30, 20, 15, 10, 7, 5, 4, 3.5, 3],
+      "ebitMarginPath": [3, 5, 7, 8, 8, 8, 8, 8, 8],
+      "salestoCapital": 2.5,
+      "forecast": [
+        { "year": 2026, "deliveries": 423836, "revenue": 16.155, "ebit": 0.485, "fcff": -1.151, "pvFCFF": -1.049 },
+        { "year": 2027, "deliveries": 508604, "revenue": 19.967, "ebit": 0.998, "fcff": -0.527, "pvFCFF": -0.437 },
+        { "year": 2028, "deliveries": 584894, "revenue": 23.651, "ebit": 1.656, "fcff": -0.149, "pvFCFF": -0.113 },
+        { "year": 2029, "deliveries": 643384, "revenue": 26.797, "ebit": 2.144, "fcff": 0.350,  "pvFCFF": 0.241  },
+        { "year": 2030, "deliveries": 688421, "revenue": 29.533, "ebit": 2.363, "fcff": 0.678,  "pvFCFF": 0.425  },
+        { "year": 2031, "deliveries": 722842, "revenue": 31.940, "ebit": 2.555, "fcff": 0.954,  "pvFCFF": 0.545  },
+        { "year": 2032, "deliveries": 751755, "revenue": 34.214, "ebit": 2.737, "fcff": 1.143,  "pvFCFF": 0.595  },
+        { "year": 2033, "deliveries": 778067, "revenue": 36.474, "ebit": 2.918, "fcff": 1.284,  "pvFCFF": 0.609  },
+        { "year": 2034, "deliveries": 801409, "revenue": 38.695, "ebit": 3.096, "fcff": 1.433,  "pvFCFF": 0.619  },
+        { "year": 2035, "deliveries": 825451, "revenue": 41.051, "ebit": 3.284, "fcff": 1.520,  "pvFCFF": 0.598  },
+        { "year": 2040, "deliveries": 956924, "revenue": 55.170, "ebit": 4.414, "fcff": 2.043,  "pvFCFF": 0.504  }
+      ]
+    },
+    "upside": {
+      "label": "Upside",
+      "intrinsicValue": 13.12,
+      "deliveryGrowthPath": [40, 25, 18, 12, 8, 6, 5, 4, 3.5],
+      "ebitMarginPath": [5, 8, 10, 10, 10, 10, 10, 10, 10],
+      "salestoCapital": 3.0,
+      "forecast": [
+        { "year": 2026, "deliveries": 456439, "revenue": 17.397, "ebit": 0.870, "fcff": -0.908, "pvFCFF": -0.827 },
+        { "year": 2027, "deliveries": 570549, "revenue": 22.399, "ebit": 1.792, "fcff": 0.125,  "pvFCFF": 0.103  },
+        { "year": 2028, "deliveries": 673248, "revenue": 27.224, "ebit": 2.722, "fcff": 0.570,  "pvFCFF": 0.431  },
+        { "year": 2029, "deliveries": 754038, "revenue": 31.406, "ebit": 3.141, "fcff": 0.962,  "pvFCFF": 0.662  },
+        { "year": 2030, "deliveries": 814361, "revenue": 34.936, "ebit": 3.494, "fcff": 1.444,  "pvFCFF": 0.905  },
+        { "year": 2031, "deliveries": 863222, "revenue": 38.143, "ebit": 3.814, "fcff": 1.792,  "pvFCFF": 1.023  },
+        { "year": 2032, "deliveries": 906383, "revenue": 41.251, "ebit": 4.125, "fcff": 2.058,  "pvFCFF": 1.070  },
+        { "year": 2033, "deliveries": 942639, "revenue": 44.188, "ebit": 4.419, "fcff": 2.335,  "pvFCFF": 1.106  },
+        { "year": 2034, "deliveries": 975631, "revenue": 47.107, "ebit": 4.711, "fcff": 2.560,  "pvFCFF": 1.105  },
+        { "year": 2035, "deliveries": 1004900, "revenue": 49.976, "ebit": 4.998, "fcff": 2.792,  "pvFCFF": 1.098  },
+        { "year": 2040, "deliveries": 1164954, "revenue": 67.163, "ebit": 6.716, "fcff": 3.752,  "pvFCFF": 0.925  }
+      ]
+    }
+  },
+  "risks": [
+    { "rank": 1, "title": "Margin compression", "detail": "Renewed China EV price wars compress gross margin before scale benefits arrive — the primary DCF lever." },
+    { "rank": 2, "title": "Dilution risk", "detail": "Capital raises (equity / convertibles) if operating losses persist erode per-share value even if EV improves." },
+    { "rank": 3, "title": "Opex intensity", "detail": "R&D + SG&A don't scale down with revenue — delays the profitability ramp and kills the margin path." },
+    { "rank": 4, "title": "FX (USD/CNY)", "detail": "USD returns diverge from RMB economics if CNY depreciates; all revenue is RMB-denominated." },
+    { "rank": 5, "title": "Demand / ASP mix", "detail": "Mix shift toward lower-ASP models or weaker demand reduces vehicle margin and average selling price." },
+    { "rank": 6, "title": "Execution risk", "detail": "New model ramps, supply chain disruptions, or software quality issues break the delivery growth path." },
+    { "rank": 7, "title": "Geopolitical shocks", "detail": "US–China tensions raise the equity risk premium and compress the valuation multiple across the board." },
+    { "rank": 8, "title": "Refinancing risk", "detail": "Debt/convertible maturities under pressure if cash burn returns; effective cost of debt rises vs. modeled." }
+  ],
+  "catalysts": [
+    "Full-year earnings release clarifying margin trajectory and cash burn rate",
+    "Evidence of sustained gross margin improvement and opex discipline",
+    "Funding events (equity/convertible issuance) that change the dilution math",
+    "January 2026 deliveries of 27,182 — up 96.1% YoY — signal continued volume momentum"
+  ],
+  "managementQuestions": [
+    "What concrete cost actions make the opex ratio structurally lower — not temporary?",
+    "What gross margin floor is realistic under continued China EV price pressure?",
+    "What is the capital plan if profitability slips — equity vs. convertibles vs. asset sales?",
+    "How should investors think about battery swap economics and its margin contribution?",
+    "What delivery + mix assumptions underpin management's internal break-even plan?"
+  ]
+}

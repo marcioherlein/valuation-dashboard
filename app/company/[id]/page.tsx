@@ -5,8 +5,9 @@ import { CompanyDetail } from "@/types";
 import TopBar from "@/components/TopBar";
 import CompanyReport from "@/components/CompanyReport";
 
+// Next.js 15: params is a Promise
 interface Props {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 export async function generateStaticParams() {
@@ -15,13 +16,14 @@ export async function generateStaticParams() {
   return files.map(f => ({ id: f.replace(".json", "") }));
 }
 
-export default function CompanyPage({ params }: Props) {
-  const filePath = path.join(process.cwd(), "data", `${params.id}.json`);
+export default async function CompanyPage({ params }: Props) {
+  const { id } = await params;
+  const filePath = path.join(process.cwd(), "data", `${id}.json`);
   if (!fs.existsSync(filePath)) notFound();
   const data: CompanyDetail = JSON.parse(fs.readFileSync(filePath, "utf-8"));
 
   return (
-    <div style={{ minHeight: "100vh", background: "var(--bg-primary)" }}>
+    <div style={{ minHeight: "100vh" }}>
       <TopBar />
       <CompanyReport data={data} />
     </div>

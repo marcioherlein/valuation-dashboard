@@ -1,3 +1,4 @@
+"use client";
 import TopBar from "@/components/TopBar";
 import MarketDashboard from "@/components/MarketDashboard";
 import CompanyCard from "@/components/CompanyCard";

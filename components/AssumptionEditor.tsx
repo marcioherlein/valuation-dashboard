@@ -5,7 +5,7 @@ import { CompanyDetail } from "@/types";
 
 const FONT = "'Geist', -apple-system, sans-serif";
 const MONO = "'Geist Mono', monospace";
-const C = { blue:"var(--blue)", green:"var(--green)", red:"var(--red)", amber:"var(--amber)", t1:"var(--t1)", t2:"var(--t2)", t3:"var(--t3)", t4:"var(--t4)" };
+const C = { blue:"var(--blue)", green:"var(--green)", red:"var(--red)", amber:"var(--amber)", purple:"var(--purple)", t1:"var(--t1)", t2:"var(--t2)", t3:"var(--t3)", t4:"var(--t4)" };
 
 const TT = {
   contentStyle: { background:"rgba(13,17,23,0.97)", border:"1px solid rgba(255,255,255,0.12)", borderRadius:10, fontSize:11, fontFamily:FONT, color:C.t1 },

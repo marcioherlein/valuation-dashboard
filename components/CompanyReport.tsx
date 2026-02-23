@@ -12,7 +12,7 @@ const FONT = "'Geist', -apple-system, sans-serif";
 const MONO = "'Geist Mono', monospace";
 const C = {
   blue:"var(--blue)", green:"var(--green)", red:"var(--red)",
-  amber:"var(--amber)", purple:"var(--purple)",
+  amber:"var(--amber)", purple:"rgba(199,125,255,0.7)",
   t1:"var(--t1)", t2:"var(--t2)", t3:"var(--t3)", t4:"var(--t4)"
 };
 

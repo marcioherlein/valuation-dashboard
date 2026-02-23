@@ -36,12 +36,23 @@ function runDCF(params: {
   for (let i = 0; i < horizon; i++) {
     const g = (growthRates[i] ?? growthRates[growthRates.length - 1]) / 100;
     revenue = revenue * (1 + g);
-    const margin = (ebitMargins[i] ?? ebitMargins[ebitMargins.length - 1]) / 100;
-    const ebit = revenue * margin;
-    const reinvestment = (growthRates[i] ?? growthRates[growthRates.length - 1]) > 0
-      ? (revenue - (i === 0 ? baseRevenue : forecast[i-1]?.revenue ?? baseRevenue)) / salesToCapital
-      : 0;
-    const fcff = ebit * 0.77 - reinvestment; // ~23% tax shield approx
+// Margin and EBIT calculation
+const margin = (ebitMargins[i] ?? ebitMargins[ebitMargins.length - 1]) / 100;
+const ebit = revenue * margin;
+
+// Break out growth and previous revenue to avoid circular inference
+const growthVal = (growthRates[i] ?? growthRates[growthRates.length - 1]);
+const prevRevenue: number =
+  i === 0 ? baseRevenue : (forecast[i - 1]?.revenue ?? baseRevenue);
+
+// Explicitly type reinvestment so it isn’t implicitly `any`
+const reinvestment: number =
+  growthVal > 0
+    ? (revenue - prevRevenue) / salesToCapital
+    : 0;
+
+// FCFF uses the corrected EBIT and reinvestment
+const fcff = ebit * 0.77 - reinvestment; // ~23% tax shield approx
     const pv = fcff / Math.pow(1 + dr, i + 1);
     sumPV += pv;
     forecast.push({ year: startYear + i, revenue: +revenue.toFixed(3), ebit: +ebit.toFixed(3), fcff: +fcff.toFixed(3), pvFCFF: +pv.toFixed(3) });
